@@ -10,6 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  SUPERADMIN
+  MODERATOR
+}
+
+model Admin {
+  id        String    @id @default(uuid())
+  userName  String    @db.VarChar(50)
+  email     String    @unique @db.VarChar(50)
+  password  String    @db.VarChar(50)
+  role      Role      @default(ADMIN)
+  active    Boolean   @default(true)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("admins")
+}
+
 model Product {
   id          String @id @default(uuid())
   name        String @db.VarChar(50)

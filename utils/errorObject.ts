@@ -71,4 +71,35 @@ export const defaultError = errorObj(
   "internal server error"
 );
 
+/**
+ * Invalid email error
+ * @description {400, invalidArgument , "email is not valid"}
+ */
+export const invalidEmail = errorObj(
+  400,
+  errorTypes.invalidArgument,
+  "email is not valid"
+);
+
+/**
+ * Unauthorized error
+ * @description {403 , forbidden , "not authroized"}
+ */
+export const unAuthorizedError = errorObj(
+  403,
+  errorTypes.forbidden,
+  "not authorized"
+);
+
+/**
+ * Auth required error
+ * @description {401 , "unauthorized" , "Authentication required"}
+ */
+
+export const authRequiredError = errorObj(
+  401,
+  errorTypes.unauthorized,
+  "Authentication required"
+);
+
 export default errorObj;
