@@ -62,6 +62,16 @@ export const invalidArgError = (detail: ErrorDetailType[]) => {
 };
 
 /**
+ * 404 Resource Not found Error
+ * @param resource - resource to return a message
+ * @return errOject - {404 , notfound , `${resource} not found`}
+ */
+
+export const resource404Error = (resource: string = "resource") => {
+  return errorObj(404, errorTypes.notFound, `${resource} not found`);
+};
+
+/**
  * Internal Server Error
  * @description { 500, internalError, "internal server error" }
  */
