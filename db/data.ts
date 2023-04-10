@@ -36,3 +36,24 @@ export const Customer = [
     phone: null,
   },
 ];
+
+// Category Data (3)
+export const categories = [
+  {
+    name: "men",
+    description: "sapien non mi integer ac neque duis bibendum morbi non",
+    thumbnailImage: "http://dummyimage.com/720x400.png/cc0000/ffffff",
+  },
+  {
+    name: "women",
+    description:
+      "eget vulputate ut ultrices vel augue vestibulum ante ipsum primis",
+    thumbnailImage: "http://dummyimage.com/720x400.png/dddddd/000000",
+  },
+  {
+    name: "bags",
+    description:
+      "turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh",
+    thumbnailImage: "http://dummyimage.com/720x400.png/dddddd/000000",
+  },
+];

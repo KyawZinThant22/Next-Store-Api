@@ -8,6 +8,39 @@ import {
 import ErrorResponse from "./errorResponse";
 import jwt from "jsonwebtoken";
 
+type OrderType = { [key: string]: string };
+
+/**
+ * Receives coma seperated strings and return { string : true}
+ * @param query comma seperated string
+ * @returns objects { string : true , string : true }
+ * @examples name,price,stock => { name : true , price : true , stock : true}
+ */
+export const selectQuery = (query: string) => {
+  return query.split(",").reduce((a, v) => ({ ...a, [v.trim()]: true }), {});
+};
+
+/**
+ * Receive string and return array of { key: value } pairs
+ * @param query - query string
+ * @returns array of object [ {key:value}, etc]
+ * @example 'price.desc,name' => [ { price: 'desc' }, { name: 'asc' } ]
+ */
+export const orderedQuery = (query: string) => {
+  let orderArray: OrderType[] = [];
+  const sortLists = query.split(",");
+
+  sortLists.forEach((sl) => {
+    const obj: OrderType = {};
+
+    const fields = sl.split(".");
+    obj[fields[0]] = fields[1] || "asc";
+    orderArray = [...orderArray, obj];
+  });
+
+  return orderArray;
+};
+
 /**
  * Check required fields
  * @param requiredObj - required fields as an Obj
