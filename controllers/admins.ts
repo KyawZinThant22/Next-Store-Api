@@ -16,7 +16,7 @@ import {
 } from "../utils/helperFunction";
 
 /**
- * Create New Admin
+ * Create Admin
  * @route POST api/v1/admin
  * @access PRIVATE (superAdmin)
  */

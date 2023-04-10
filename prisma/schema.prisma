@@ -30,20 +30,41 @@ model Admin {
 }
 
 model Customer {
-  id        String    @id @default(uuid())
-  fullName  String    @db.VarChar(255)
-  email     String    @unique @db.VarChar(255)
-  password  String    @db.VarChar(50)
-  phone     String?   @db.VarChar(20)
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime? @map("updated_at")
+  id              String    @id @default(uuid())
+  fullname        String    @db.VarChar(50)
+  email           String    @unique @db.VarChar(50)
+  password        String    @db.VarChar(255)
+  shippingAddress String    @map("default_shipping_address")
+  phone           String?   @db.VarChar(20)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime? @map("updated_at")
 
   @@map("customers")
 }
 
+model Category {
+  id             String    @id @default(uuid())
+  name           String    @db.VarChar(255)
+  description    String?   @db.VarChar(255)
+  thumbnailImage String?   @map("thumbnail_image") @db.VarChar(100)
+  products       Product[]
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime? @map("updated_at")
+
+  @@map("categories")
+}
+
 model Product {
-  id          String @id @default(uuid())
-  name        String @db.VarChar(50)
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(50)
   price       Int
-  description String @db.VarChar(255)
+  description String    @db.VarChar(255)
+  detail      String?
+  stock       Int       @default(0)
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: NoAction)
+  categoryId  String?   @map("category_id")
+  img1        String    @map("image1") @db.VarChar(255)
+  img2        String    @map("image2") @db.VarChar(255)
+
+  @@map("products")
 }

@@ -31,14 +31,28 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     name: string | undefined;
     price: string | undefined;
     description: string | undefined;
+    image1: string | undefined;
+    image2: string | undefined;
   };
 
-  let { name, price, description } = req.body;
+  let {
+    name,
+    price,
+    description,
+    image1,
+    image2,
+    discountPercent,
+    detail,
+    categoryId,
+    stock,
+  } = req.body;
 
   const requiredFields: RequiredFieldTypes = {
     name,
     price,
     description,
+    image1,
+    image2,
   };
 
   //   Throws error if the required fields is not specified
@@ -46,16 +60,21 @@ export const createProduct = asyncHandler(async (req, res, next) => {
   if (hasError !== false) return hasError;
   console.log("hasError", hasError);
 
-  //   // Throws error if price field is not number or negative number
-  //   if (!parseFloat(price) || parseFloat(price) < 0) {
-  //     return next(new ErrorResponse(invalidPriceError, 400));
-  //   }
+  // Throws error if price field is not number or negative number
+  if (!parseFloat(price) || parseFloat(price) < 0) {
+    return next(new ErrorResponse(invalidPriceError, 400));
+  }
 
   const product = await prisma.product.create({
     data: {
       name,
       price,
       description,
+      img1: image1,
+      img2: image2,
+      category: {
+        connect: { id: categoryId },
+      },
     },
   });
 
