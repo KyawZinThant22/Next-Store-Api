@@ -29,6 +29,18 @@ model Admin {
   @@map("admins")
 }
 
+model Customer {
+  id        String    @id @default(uuid())
+  fullName  String    @db.VarChar(255)
+  email     String    @unique @db.VarChar(255)
+  password  String    @db.VarChar(50)
+  phone     String?   @db.VarChar(20)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("customers")
+}
+
 model Product {
   id          String @id @default(uuid())
   name        String @db.VarChar(50)

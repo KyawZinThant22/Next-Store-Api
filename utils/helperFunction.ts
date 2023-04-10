@@ -1,4 +1,5 @@
 import { NextFunction } from "express";
+import bcrypt from "bcrypt";
 import {
   ErrorDetailType,
   invalidArgDetail,
@@ -28,3 +29,31 @@ export const checkRequiredFields = (
     return next(new ErrorResponse(invalidArgError(errorArray), 400));
   }
 };
+
+/**
+ * Check email is valid
+ * @param email - email to be checked
+ * @returns true | false
+ */
+export const validateEmail = (email: string) => {
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return emailRegex.test(String(email).toLowerCase());
+};
+
+/**
+ * Check roles
+ * @param role
+ * @returns true | false
+ */
+export const CheckRole = (role: string) => {
+  const allowedRoles = ["SUPERADMIN", "ADMIN", "MODERATOR"];
+  return allowedRoles.includes(role) ? true : false;
+};
+
+/**
+ * hash plain password
+ * @param plan password
+ * @returns hashed password
+ */
+
+export const hashPassword = (password: string) => bcrypt.hash(password, 10);

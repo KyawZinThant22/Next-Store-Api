@@ -95,11 +95,20 @@ export const unAuthorizedError = errorObj(
  * Auth required error
  * @description {401 , "unauthorized" , "Authentication required"}
  */
-
 export const authRequiredError = errorObj(
   401,
   errorTypes.unauthorized,
   "Authentication required"
+);
+
+/**
+ * Chec role error
+ * @description {400 , invalidArgument , "role type is not a valid"}
+ */
+export const roleError = errorObj(
+  400,
+  errorTypes.invalidArgument,
+  "Role type is not a valid"
 );
 
 export default errorObj;
