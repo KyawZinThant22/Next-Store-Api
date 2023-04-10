@@ -76,8 +76,8 @@ export const comparePassword = (inputPwd: string, storedPwd: string) => {
  * @returns jwt
  */
 
-export const generateToken = (id: number, email: string) => {
-  jwt.sign(
+export const generateToken = (id: string, email: string) => {
+  return jwt.sign(
     {
       iat: Math.floor(Date.now() / 1000) - 30,
       id,
