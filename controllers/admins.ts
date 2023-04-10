@@ -124,3 +124,21 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
     token,
   });
 });
+
+/**
+ * Delete admin
+ * @route DELETE api/v1/admin/:id
+ * @access PRIVATE (superAdmin)
+ */
+
+export const deleteAdmin = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+
+  await prisma.admin.delete({
+    where: { id },
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
