@@ -1,8 +1,15 @@
 import { Router } from "express";
-import { getCategories } from "../controllers/categories";
+import {
+  createCategory,
+  deleteCategory,
+  getCategories,
+} from "../controllers/categories";
+import { adminOnly } from "../middlewares/authHandlers";
 
 const router = Router();
 
-router.get("/", getCategories);
+router.route("/").get(getCategories).post(adminOnly, createCategory);
+
+router.route("/:id").delete(adminOnly, deleteCategory);
 
 export default router;

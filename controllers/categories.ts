@@ -1,6 +1,10 @@
 import { Prisma } from "@prisma/client";
 import asyncHandler from "../middlewares/asyncHandlers";
-import { orderedQuery, selectQuery } from "../utils/helperFunction";
+import {
+  checkRequiredFields,
+  orderedQuery,
+  selectQuery,
+} from "../utils/helperFunction";
 import prisma from "../prisma/client";
 
 /**
@@ -38,5 +42,56 @@ export const getCategories = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: categories,
+  });
+});
+
+/**
+ * create Category
+ * @route POST /api/v1/category
+ * @access PRIVATE (admin)
+ */
+export const createCategory = asyncHandler(async (req, res, next) => {
+  const queryName: string | undefined = req.body.name;
+  const description: string | undefined = req.body.description;
+  const thumbnailImage: string | undefined = req.body.thumbnailImage;
+  let name: string | undefined;
+
+  //throw error if the name field is not specified
+  const hasError = checkRequiredFields({ name: queryName }, next);
+  if (hasError !== false) return hasError;
+
+  //trim the name and chage it inti lowercase
+  name = (queryName as string).trim().toLowerCase();
+
+  //create category in prisma client
+  const category = await prisma.category.create({
+    data: {
+      name,
+      description,
+      thumbnailImage,
+    },
+  });
+
+  res.status(201).json({
+    success: true,
+    data: category,
+  });
+});
+
+/**
+ * delete Category
+ * @route delete /api/v1/category/:id
+ * @access PRIVATE (admin)
+ */
+export const deleteCategory = asyncHandler(async (req, res, next) => {
+  const category_id = req.params.id;
+
+  await prisma.category.delete({
+    where: { id: category_id },
+  });
+
+  res.status(204).json({
+    success: true,
+    data: [],
   });
 });
