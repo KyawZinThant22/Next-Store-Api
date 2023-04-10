@@ -9,6 +9,11 @@ import {
   validateEmail,
 } from "../utils/helperFunction";
 
+/**
+ * Create New Admin
+ * @route POST api/v1/admin
+ * @access PRIVATE (superAdmin)
+ */
 export const createAdmin = asyncHandler(async (req, res, next) => {
   const { userName, email, role, password } = req.body;
 

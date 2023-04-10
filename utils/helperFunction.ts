@@ -6,6 +6,7 @@ import {
   invalidArgError,
 } from "./errorObject";
 import ErrorResponse from "./errorResponse";
+import jwt from "jsonwebtoken";
 
 /**
  * Check required fields
@@ -66,4 +67,23 @@ export const hashPassword = (password: string) => bcrypt.hash(password, 10);
  */
 export const comparePassword = (inputPwd: string, storedPwd: string) => {
   return bcrypt.compare(inputPwd, storedPwd);
+};
+
+/**
+ * generate JsonWebToken
+ * @param {number} id - User Id
+ * @param { string} email - User email
+ * @returns jwt
+ */
+
+export const generateToken = (id: number, email: string) => {
+  jwt.sign(
+    {
+      iat: Math.floor(Date.now() / 1000) - 30,
+      id,
+      email,
+    },
+    process.env.JWT_SECRET as string,
+    { expiresIn: "1h" }
+  );
 };
