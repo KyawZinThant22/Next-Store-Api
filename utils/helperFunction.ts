@@ -57,3 +57,13 @@ export const CheckRole = (role: string) => {
  */
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
+
+/**
+ * Compare input password with store input password
+ * @param inputPassword - inputPassword
+ * @param storedPassword - storedPassword
+ * @returns true | false (promise)
+ */
+export const comparePassword = (inputPwd: string, storedPwd: string) => {
+  return bcrypt.compare(inputPwd, storedPwd);
+};

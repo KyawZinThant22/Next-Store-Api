@@ -111,4 +111,15 @@ export const roleError = errorObj(
   "Role type is not a valid"
 );
 
+/**
+ * Incorrect Credentials Error
+ * @description {401 ,, unthorized , "email or password is incorrect"}
+ */
+
+export const IncorrectCredentials = errorObj(
+  401,
+  errorTypes.unauthorized,
+  "Email or password is incorrect"
+);
+
 export default errorObj;

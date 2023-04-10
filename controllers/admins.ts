@@ -47,3 +47,28 @@ export const createAdmin = asyncHandler(async (req, res, next) => {
     },
   });
 });
+
+/**
+ * Get all admins
+ * @route GET api/v1/admins
+ * @access Private (superAdmin)
+ */
+export const getAdmins = asyncHandler(async (req, res, next) => {
+  const admins = await prisma.admin.findMany({
+    select: {
+      id: true,
+      userName: true,
+      email: true,
+      role: true,
+      active: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+    count: admins.length,
+    data: admins,
+  });
+});
