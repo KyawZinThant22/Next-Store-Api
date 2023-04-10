@@ -20,7 +20,7 @@ model Admin {
   id        String    @id @default(uuid())
   userName  String    @db.VarChar(50)
   email     String    @unique @db.VarChar(50)
-  password  String    @db.VarChar(50)
+  password  String    @db.VarChar(255)
   role      Role      @default(ADMIN)
   active    Boolean   @default(true)
   createdAt DateTime  @default(now()) @map("created_at")
