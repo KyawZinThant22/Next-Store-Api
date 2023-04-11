@@ -1,4 +1,4 @@
-import { Customer, categories } from "./data";
+import { Customer, categories, products } from "./data";
 import { PrismaClient } from "@prisma/client";
 
 let prisma = new PrismaClient({
@@ -7,6 +7,12 @@ let prisma = new PrismaClient({
 ``;
 
 async function main() {
+  await prisma.customer.deleteMany();
+
+  await prisma.category.deleteMany();
+
+  await prisma.product.deleteMany();
+
   for (let customer of Customer) {
     await prisma.customer.create({
       data: customer,

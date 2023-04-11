@@ -65,6 +65,14 @@ export const checkRequiredFields = (
 };
 
 /**
+ * Check if a number is positive
+ * @param num - num to be checked
+ * @returns true | false
+ */
+
+export const isIntergerAndPositive = (num: number) => num % 1 === 0 && num > 0;
+
+/**
  * Check email is valid
  * @param email - email to be checked
  * @returns true | false

@@ -55,16 +55,19 @@ model Category {
 }
 
 model Product {
-  id          String    @id @default(uuid())
-  name        String    @db.VarChar(50)
-  price       Int
-  description String    @db.VarChar(255)
-  detail      String?
-  stock       Int       @default(0)
-  category    Category? @relation(fields: [categoryId], references: [id], onDelete: NoAction)
-  categoryId  String?   @map("category_id")
-  img1        String    @map("image1") @db.VarChar(255)
-  img2        String    @map("image2") @db.VarChar(255)
+  id              String    @id @default(uuid())
+  name            String    @db.VarChar(50)
+  discountPercent Int?      @default(0) @map("discount_percent")
+  price           Decimal   @db.Decimal(7, 2)
+  description     String    @db.VarChar(255)
+  detail          String?   @db.VarChar(500)
+  stock           Int       @default(0)
+  category        Category? @relation(fields: [categoryId], references: [id], onDelete: NoAction)
+  categoryId      String?   @map("category_id")
+  image1          String    @map("image1") @db.VarChar(100)
+  image2          String    @map("image2") @db.VarChar(100)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime? @map("updated_at")
 
   @@map("products")
 }

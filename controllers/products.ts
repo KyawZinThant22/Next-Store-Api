@@ -1,6 +1,9 @@
 import prisma from "../prisma/client";
 import asyncHandler from "../middlewares/asyncHandlers";
-import { checkRequiredFields } from "../utils/helperFunction";
+import {
+  checkRequiredFields,
+  isIntergerAndPositive,
+} from "../utils/helperFunction";
 import errorObj, { errorTypes } from "../utils/errorObject";
 import ErrorResponse from "../utils/errorResponse";
 
@@ -9,9 +12,8 @@ import ErrorResponse from "../utils/errorResponse";
  * @route GET api/v1/products
  * @access Public
  */
-
 export const getProducts = asyncHandler(async (req, res, next) => {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({});
 
   res.status(200).json({
     success: true,
@@ -65,13 +67,36 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(invalidPriceError, 400));
   }
 
+  //Throws error if stock field is not valid interger
+  if (stock) {
+    if (stock && !isIntergerAndPositive(stock)) {
+      return next(new ErrorResponse(invalidStockError, 400));
+    }
+    stock = parseInt(stock);
+  }
+
+  //Throws error if category is invalid
+  if (categoryId) {
+    const category = await prisma.category.findUnique({
+      where: { id: categoryId },
+    });
+
+    if (!category) {
+      return next(new ErrorResponse(invalidCategoryError(categoryId), 400));
+    }
+    categoryId = categoryId;
+  }
+
   const product = await prisma.product.create({
     data: {
       name,
       price,
       description,
-      img1: image1,
-      img2: image2,
+      image1,
+      image2,
+      discountPercent,
+      detail,
+      stock,
       category: {
         connect: { id: categoryId },
       },
@@ -96,3 +121,23 @@ const invalidPriceError = errorObj(
     },
   ]
 );
+
+const invalidStockError = errorObj(
+  400,
+  errorTypes.invalidArgument,
+  "Invalid Stock Field",
+  [
+    {
+      code: "invalidStock",
+      message: "Stock field must only be valid interger",
+    },
+  ]
+);
+
+const invalidCategoryError = (categoryId: string) =>
+  errorObj(400, errorTypes.invalidArgument, "Invalid category id", [
+    {
+      code: "Invalid Category",
+      message: `there is no category with id ${categoryId}`,
+    },
+  ]);
