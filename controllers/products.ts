@@ -27,7 +27,6 @@ export const getProducts = asyncHandler(async (req, res, next) => {
  * @route POST api/v1/products
  * @access Private
  */
-
 export const createProduct = asyncHandler(async (req, res, next) => {
   type RequiredFieldTypes = {
     name: string | undefined;
@@ -106,6 +105,24 @@ export const createProduct = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: product,
+  });
+});
+
+/**
+ * Delete a product
+ * @route DELETE /api/v1/products/:id
+ * @access PRIVATE
+ */
+export const deleteProduct = asyncHandler(async (req, res, next) => {
+  const product_id = req.params.id;
+
+  await prisma.product.delete({
+    where: { id: product_id },
+  });
+
+  res.status(204).json({
+    success: true,
+    data: [],
   });
 });
 
