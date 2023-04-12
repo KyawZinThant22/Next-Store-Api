@@ -6,6 +6,7 @@ import {
 } from "../utils/helperFunction";
 import errorObj, { errorTypes } from "../utils/errorObject";
 import ErrorResponse from "../utils/errorResponse";
+import { Prisma } from "@prisma/client";
 
 /**
  * Get all products
@@ -13,6 +14,20 @@ import ErrorResponse from "../utils/errorResponse";
  * @access Public
  */
 export const getProducts = asyncHandler(async (req, res, next) => {
+  type FilteredType = { [key: string]: number };
+
+  // requested query
+  const querySelect = req.query.select;
+  const queryPrice = req.query.price;
+  const queryOrderBy = req.query.order_by;
+  const queryInclude = req.query.include;
+  const queryLimit = req.query.limit;
+  const queryStock = req.query.category;
+  const queryCategory = req.query.category;
+
+  //init variables
+  let select: Prisma.ProductSelect;
+
   const products = await prisma.product.findMany({});
 
   res.status(200).json({
