@@ -28,7 +28,11 @@ export const getProducts = asyncHandler(async (req, res, next) => {
   //init variables
   let select: Prisma.ProductSelect;
 
-  const products = await prisma.product.findMany({});
+  const products = await prisma.product.findMany({
+    include: {
+      category: true,
+    },
+  });
 
   res.status(200).json({
     success: true,

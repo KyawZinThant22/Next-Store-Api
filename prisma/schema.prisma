@@ -47,7 +47,7 @@ model Category {
   name           String    @db.VarChar(255)
   description    String?   @db.VarChar(255)
   thumbnailImage String?   @map("thumbnail_image") @db.VarChar(100)
-  products       Product[]
+  products       Product[] @relation("products")
   createdAt      DateTime  @default(now()) @map("created_at")
   updatedAt      DateTime? @map("updated_at")
 
@@ -62,7 +62,7 @@ model Product {
   description     String    @db.VarChar(255)
   detail          String?   @db.VarChar(500)
   stock           Int       @default(0)
-  category        Category? @relation(fields: [categoryId], references: [id], onDelete: NoAction)
+  category        Category? @relation("products", fields: [categoryId], references: [id], onDelete: NoAction)
   categoryId      String?   @map("category_id")
   image1          String    @map("image1") @db.VarChar(100)
   image2          String    @map("image2") @db.VarChar(100)
