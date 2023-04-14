@@ -9,7 +9,11 @@ import {
   selectAllProductField,
   selectQuery,
 } from "../utils/helperFunction";
-import errorObj, { errorObjType, errorTypes } from "../utils/errorObject";
+import errorObj, {
+  errorObjType,
+  errorTypes,
+  resource404Error,
+} from "../utils/errorObject";
 import ErrorResponse from "../utils/errorResponse";
 import { Prisma } from "@prisma/client";
 
@@ -127,35 +131,25 @@ export const getProducts = asyncHandler(async (req, res, next) => {
     stock = filteredQty(queryStock as string | string[]);
   }
 
-  console.log("price", price);
+  // if req products with certain category
+  if (queryCategory) {
+    console.log(queryCategory);
+    const category = await prisma.category.findUnique({
+      where: { name: queryCategory as string },
+    });
+
+    if (!category) {
+      return next(new ErrorResponse(resource404Error("category"), 404));
+    }
+    categoryId = category.id;
+  }
+
   const products = await prisma.product.findMany({
     select,
     orderBy,
     skip,
     take,
     where: {
-      AND: [
-        {
-          AND: [
-            {
-              price: price[0],
-            },
-            {
-              price: price[1],
-            },
-          ],
-        },
-        {
-          AND: [
-            {
-              stock: stock[0],
-            },
-            {
-              stock: stock[1],
-            },
-          ],
-        },
-      ],
       categoryId: {
         equals: categoryId,
       },

@@ -68,7 +68,7 @@ export const products = [
       "condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros",
     detail:
       "mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum",
-    categoryId: "e0bd6498-c808-4218-ae3d-974e72e65ab6",
+    categoryId: "8560da60-4271-45ab-abc3-e2735730f86d",
     image1:
       "https://robohash.org/voluptatemsuntnostrum.png?size=300x300&set=set1",
     image2: "https://robohash.org/utrationetempore.png?size=300x300&set=set1",
@@ -82,7 +82,7 @@ export const products = [
       "semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum",
     detail:
       "ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet",
-    categoryId: "b679610b-d6fb-4fcc-b344-76ab57c2b572",
+    categoryId: "8560da60-4271-45ab-abc3-e2735730f86d",
     image1: "https://robohash.org/aliquamuttenetur.png?size=300x300&set=set1",
     image2: "https://robohash.org/nulladoloremquerem.png?size=300x300&set=set1",
     stock: 11,
@@ -95,7 +95,8 @@ export const products = [
       "viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae",
     detail:
       "magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id",
-    categoryId: "b679610b-d6fb-4fcc-b344-76ab57c2b572",
+    categoryId: "8560da60-4271-45ab-abc3-e2735730f86d",
+
     image1: "https://robohash.org/idaliquiddolor.png?size=300x300&set=set1",
     image2:
       "https://robohash.org/porromolestiasvoluptate.png?size=300x300&set=set1",
@@ -109,7 +110,7 @@ export const products = [
       "etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi",
     detail:
       "iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate",
-    categoryId: "f5050b2e-45b9-4643-8315-48f02595f171",
+    categoryId: "ec7a9d23-2e75-4c4f-aa8c-68a778421a0f",
     image1: "https://robohash.org/solutamolestiashic.png?size=300x300&set=set1",
     image2: "https://robohash.org/nemoeteos.png?size=300x300&set=set1",
     stock: 17,
@@ -122,7 +123,8 @@ export const products = [
       "rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut",
     detail:
       "est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla",
-    categoryId: "9f17e9ae-d12c-41b5-a040-fa07c9fde4c6",
+    categoryId: "ec7a9d23-2e75-4c4f-aa8c-68a778421a0f",
+
     image1: "https://robohash.org/estnemoqui.png?size=300x300&set=set1",
     image2:
       "https://robohash.org/omnisdoloresperferendis.png?size=300x300&set=set1",
@@ -136,7 +138,8 @@ export const products = [
       "elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis",
     detail:
       "ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque quisque porta volutpat erat quisque",
-    categoryId: "f5050b2e-45b9-4643-8315-48f02595f171",
+    categoryId: "ec7a9d23-2e75-4c4f-aa8c-68a778421a0f",
+
     image1: "https://robohash.org/quoautaut.png?size=300x300&set=set1",
     image2: "https://robohash.org/inquovelit.png?size=300x300&set=set1",
     stock: 56,
@@ -149,7 +152,8 @@ export const products = [
       "lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero",
     detail:
       "elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam",
-    categoryId: "9f17e9ae-d12c-41b5-a040-fa07c9fde4c6",
+    categoryId: "ec7a9d23-2e75-4c4f-aa8c-68a778421a0f",
+
     image1: "https://robohash.org/eoseamodi.png?size=300x300&set=set1",
     image2:
       "https://robohash.org/fugapraesentiumdolorum.png?size=300x300&set=set1",
