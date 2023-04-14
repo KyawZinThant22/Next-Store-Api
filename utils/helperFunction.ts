@@ -9,6 +9,39 @@ import ErrorResponse from "./errorResponse";
 import jwt from "jsonwebtoken";
 
 type OrderType = { [key: string]: string };
+type FilteredType = { [key: string]: number };
+
+export type ProductSelectType = {
+  id: boolean;
+  name: boolean;
+  price: boolean;
+  discountPercent: boolean;
+  description: boolean;
+  detail: boolean;
+  categoryId: boolean;
+  image1: boolean;
+  image2: boolean;
+  stock: boolean;
+  createdAt: boolean;
+  updatedAt: boolean;
+  tags: boolean;
+  category: boolean;
+};
+
+export const selectAllProductField = () => ({
+  id: true,
+  name: true,
+  price: true,
+  discountPercent: true,
+  description: true,
+  detail: true,
+  categoryId: true,
+  image1: true,
+  image2: true,
+  stock: true,
+  createdAt: true,
+  updatedAt: true,
+});
 
 /**
  * Receives coma seperated strings and return { string : true}

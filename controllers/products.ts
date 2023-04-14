@@ -1,8 +1,11 @@
 import prisma from "../prisma/client";
 import asyncHandler from "../middlewares/asyncHandlers";
 import {
+  ProductSelectType,
   checkRequiredFields,
   isIntergerAndPositive,
+  selectAllProductField,
+  selectQuery,
 } from "../utils/helperFunction";
 import errorObj, { errorTypes } from "../utils/errorObject";
 import ErrorResponse from "../utils/errorResponse";
@@ -26,12 +29,63 @@ export const getProducts = asyncHandler(async (req, res, next) => {
   const queryCategory = req.query.category;
 
   //init variables
-  let select: Prisma.ProductSelect;
+  let select: Prisma.ProductSelect | ProductSelectType | undefined;
+  let orderBy:
+    | Prisma.Enumerable<Prisma.ProductOrderByWithRelationInput>
+    | undefined;
+  let take: number | undefined;
+  let price: FilteredType | undefined;
+  let stock: FilteredType | undefined;
+  let categoryId: string | undefined;
+
+  //returns error if include field is not tag or category
+  if (queryInclude) {
+    let error: boolean = false;
+    let includedFields = (queryInclude as string).split(",");
+    includedFields.forEach((field) => {
+      if (field !== "tags" && field !== "category") {
+        error = true;
+      }
+    });
+
+    if (error) {
+      return next(
+        new ErrorResponse(
+          {
+            status: 400,
+            type: errorTypes.badRequest,
+            message: "include field is not correct",
+          },
+          400
+        )
+      );
+    }
+  }
+
+  // if select & !include
+  if (querySelect && !queryInclude) {
+    select = selectQuery(querySelect as string);
+  }
+  //if select and include
+  else if (querySelect && queryInclude) {
+    const selectedFields = selectQuery(querySelect as string);
+    const includedFields = selectQuery(queryInclude as string);
+    select = {
+      ...selectedFields,
+      ...includedFields,
+    };
+    //if include & !select
+  } else if (!querySelect && queryInclude) {
+    const selectAll = selectAllProductField();
+    const includedFields = selectQuery(queryInclude as string);
+    select = {
+      ...selectAll,
+      ...includedFields,
+    };
+  }
 
   const products = await prisma.product.findMany({
-    include: {
-      category: true,
-    },
+    select,
   });
 
   res.status(200).json({

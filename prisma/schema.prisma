@@ -68,6 +68,16 @@ model Product {
   image2          String    @map("image2") @db.VarChar(100)
   createdAt       DateTime  @default(now()) @map("created_at")
   updatedAt       DateTime? @map("updated_at")
+  Tag             Tag?      @relation(fields: [tagId], references: [id])
+  tagId           String?
 
   @@map("products")
+}
+
+model Tag {
+  id       String    @id @default(uuid())
+  name     String    @db.VarChar(50)
+  products Product[]
+
+  @@map("tags")
 }
