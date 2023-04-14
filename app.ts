@@ -7,6 +7,7 @@ import products from "./routers/products";
 import admins from "./routers/admins";
 import customer from "./routers/customer";
 import categories from "./routers/categories";
+import auth from "./routers/auth";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/v1/products", products);
 app.use("/api/v1/admins", admins);
 app.use("/api/v1/customers", customer);
 app.use("/api/v1/categories", categories);
+app.use("/api/v1/auth", auth);
 
 app.use(errorHandler);
 
