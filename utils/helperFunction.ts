@@ -75,6 +75,35 @@ export const orderedQuery = (query: string) => {
 };
 
 /**
+ * Receive string or string[] and return array of { key: value } pairs
+ * @param query - query string or string[]
+ * @returns array of object [ {key: value}, etc ]
+ * @example ['gte:50','lt:100'] => [ { gte: 50 }, { lt: 100 } ]
+ * @example 'gte:50' => [ { gte: 50 } ]
+ */
+export const filteredQty = (query: string | string[]) => {
+  const obj: FilteredType = {};
+  const obj2: FilteredType = {};
+  let filteredValue: FilteredType[] = [];
+  if (typeof query === "string") {
+    const fields = query.split(":");
+    obj[fields[0]] = parseFloat(fields[1]);
+    filteredValue = [...filteredValue, obj];
+  }
+  if (typeof query === "object") {
+    const fields = (query as string[])[0].split(":");
+    obj[fields[0]] = parseFloat(fields[1]);
+    filteredValue = [...filteredValue, obj];
+
+    const fields2 = (query as string[])[1].split(":");
+    obj2[fields2[0]] = parseFloat(fields2[1]);
+    filteredValue = [...filteredValue, obj2];
+  }
+
+  return filteredValue;
+};
+
+/**
  * Check required fields
  * @param requiredObj - required fields as an Obj
  * @param next - express Next function

@@ -3,12 +3,13 @@ import asyncHandler from "../middlewares/asyncHandlers";
 import {
   ProductSelectType,
   checkRequiredFields,
+  filteredQty,
   isIntergerAndPositive,
   orderedQuery,
   selectAllProductField,
   selectQuery,
 } from "../utils/helperFunction";
-import errorObj, { errorTypes } from "../utils/errorObject";
+import errorObj, { errorObjType, errorTypes } from "../utils/errorObject";
 import ErrorResponse from "../utils/errorResponse";
 import { Prisma } from "@prisma/client";
 
@@ -36,9 +37,9 @@ export const getProducts = asyncHandler(async (req, res, next) => {
     | Prisma.Enumerable<Prisma.ProductOrderByWithRelationInput>
     | undefined;
   let take: number | undefined;
-  let price: FilteredType | undefined;
+  let price: FilteredType[] = [];
+  let stock: FilteredType[] = [];
   let skip: number | undefined;
-  let stock: FilteredType | undefined;
   let categoryId: string | undefined;
 
   //returns error if include field is not tag or category
@@ -92,15 +93,73 @@ export const getProducts = asyncHandler(async (req, res, next) => {
     orderBy = orderedQuery(queryOrderBy as string);
   }
 
-  //if offset param is required
+  //if offset param is request
   if (queryOffset) {
     skip = parseInt(queryOffset as string);
   }
 
+  //if querylinit is request
+  if (queryLimit) {
+    take = parseInt(queryLimit as string);
+  }
+
+  // error obj for price and stock
+  const errObj: errorObjType = {
+    status: 400,
+    type: errorTypes.badRequest,
+    message: "same parameter cannot be more than twice",
+  };
+
+  // if price param is requested
+  if (queryPrice) {
+    console.log(queryPrice);
+    if (typeof queryPrice !== "string" && (queryPrice as string[]).length > 2) {
+      return next(new ErrorResponse(errObj, 400));
+    }
+    price = filteredQty(queryPrice as string | string[]);
+  }
+
+  // if stock param is requested
+  if (queryStock) {
+    if (typeof queryStock !== "string" && (queryStock as string[]).length > 2) {
+      return next(new ErrorResponse(errObj, 400));
+    }
+    stock = filteredQty(queryStock as string | string[]);
+  }
+
+  console.log("price", price);
   const products = await prisma.product.findMany({
     select,
     orderBy,
     skip,
+    take,
+    where: {
+      AND: [
+        {
+          AND: [
+            {
+              price: price[0],
+            },
+            {
+              price: price[1],
+            },
+          ],
+        },
+        {
+          AND: [
+            {
+              stock: stock[0],
+            },
+            {
+              stock: stock[1],
+            },
+          ],
+        },
+      ],
+      categoryId: {
+        equals: categoryId,
+      },
+    },
   });
 
   res.status(200).json({
