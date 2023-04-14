@@ -4,6 +4,7 @@ import {
   ProductSelectType,
   checkRequiredFields,
   isIntergerAndPositive,
+  orderedQuery,
   selectAllProductField,
   selectQuery,
 } from "../utils/helperFunction";
@@ -84,8 +85,14 @@ export const getProducts = asyncHandler(async (req, res, next) => {
     };
   }
 
+  //if order_by param is request
+  if (queryOrderBy) {
+    orderBy = orderedQuery(queryOrderBy as string);
+  }
+
   const products = await prisma.product.findMany({
     select,
+    orderBy,
   });
 
   res.status(200).json({

@@ -9,7 +9,7 @@ let prisma = new PrismaClient({
 async function main() {
   await prisma.customer.deleteMany();
 
-  await prisma.category.deleteMany();
+  // await prisma.category.deleteMany();
 
   await prisma.product.deleteMany();
 
@@ -22,6 +22,12 @@ async function main() {
   for (let category of categories) {
     await prisma.category.create({
       data: category,
+    });
+  }
+
+  for (let product of products) {
+    await prisma.product.create({
+      data: product,
     });
   }
 }
