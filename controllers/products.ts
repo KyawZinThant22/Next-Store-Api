@@ -28,6 +28,7 @@ export const getProducts = asyncHandler(async (req, res, next) => {
   const queryLimit = req.query.limit;
   const queryStock = req.query.category;
   const queryCategory = req.query.category;
+  const queryOffset = req.query.offset;
 
   //init variables
   let select: Prisma.ProductSelect | ProductSelectType | undefined;
@@ -36,6 +37,7 @@ export const getProducts = asyncHandler(async (req, res, next) => {
     | undefined;
   let take: number | undefined;
   let price: FilteredType | undefined;
+  let skip: number | undefined;
   let stock: FilteredType | undefined;
   let categoryId: string | undefined;
 
@@ -90,9 +92,15 @@ export const getProducts = asyncHandler(async (req, res, next) => {
     orderBy = orderedQuery(queryOrderBy as string);
   }
 
+  //if offset param is required
+  if (queryOffset) {
+    skip = parseInt(queryOffset as string);
+  }
+
   const products = await prisma.product.findMany({
     select,
     orderBy,
+    skip,
   });
 
   res.status(200).json({
