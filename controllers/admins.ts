@@ -6,6 +6,7 @@ import {
   roleError,
 } from "../utils/errorObject";
 import ErrorResponse from "../utils/errorResponse";
+import { ExtendedRequest } from "../utils/extendRequest";
 import {
   CheckRole,
   checkRequiredFields,
@@ -142,3 +143,30 @@ export const deleteAdmin = asyncHandler(async (req, res, next) => {
     success: true,
   });
 });
+
+/**
+ * get current loggid-in admin
+ * @route GET /api/v1/admin/me
+ * @access PRIVATE
+ *
+ */
+
+export const getAdmin = asyncHandler(
+  async (req: ExtendedRequest, res, next) => {
+    const admin = await prisma.admin.findUnique({
+      where: { id: req?.admin?.id },
+      select: {
+        userName: true,
+        email: true,
+        active: true,
+        id: true,
+        role: true,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      data: admin,
+    });
+  }
+);
