@@ -9,3 +9,17 @@
 
 **Backend:** Node, Express, TypeScript  
 **Database:** Prisma + Mysql  
+
+## Features
+
+Here are some of the project's features
+
+- CRUD Operations
+- Authentication
+- Authorization and RBAC
+
+## Tech Stack
+
+**Backend:** Node, Express, TypeScript  
+**Database:** Prisma + MySql  
+**CI/CD:** CircleCI

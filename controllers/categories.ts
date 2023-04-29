@@ -40,6 +40,7 @@ export const getCategories = asyncHandler(async (req, res, next) => {
     orderBy,
   });
   res.status(200).json({
+    count: categories.length,
     success: true,
     data: categories,
   });
@@ -57,7 +58,10 @@ export const createCategory = asyncHandler(async (req, res, next) => {
   let name: string | undefined;
 
   //throw error if the name field is not specified
-  const hasError = checkRequiredFields({ name: queryName }, next);
+  const hasError = checkRequiredFields(
+    { name: queryName, thumbnailImage },
+    next
+  );
   if (hasError !== false) return hasError;
 
   //trim the name and chage it inti lowercase
