@@ -6,8 +6,8 @@
   "author": "kyaw zin thant",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
-    "build": "tsc -p .",
+    "start": "node dist/src/server.js",
+    "build": "tsc --project ./",
     "devStart": "nodemon server.ts"
   },
   "prisma": {
