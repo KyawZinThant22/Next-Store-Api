@@ -6,7 +6,7 @@
   "author": "kyaw zin thant",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node server.js",
     "build": "tsc --project ./",
     "devStart": "nodemon server.ts"
   },
