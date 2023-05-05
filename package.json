@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc --project ./",
+    "build": "tsc",
     "devStart": "nodemon server.ts"
   },
   "prisma": {
