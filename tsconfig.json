@@ -6,7 +6,6 @@
 	  "moduleResolution": "node",
 	  "target": "es6",
 	  "rootDir": ".",
-	//   "rootDir": "./src",
 	  "esModuleInterop": true,
 	  "outDir": "./dist",
 	  "sourceMap": true,

@@ -6,9 +6,9 @@
   "author": "kyaw zin thant",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node dist/index.js",
     "build": "tsc",
-    "devStart": "nodemon server.ts"
+    "devStart": "nodemon index.ts"
   },
   "prisma": {
     "seed": "ts-node db/seed.ts"
