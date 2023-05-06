@@ -1,13 +1,13 @@
 {
-  "name": "practice",
+  "name": "next-store-api",
   "version": "1.0.0",
   "description": "practice nodejs and prisma combo ref from haru api",
-  "main": "server.js",
+  "main": "index.js",
   "author": "kyaw zin thant",
   "license": "MIT",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "tsc -project .",
+    "build": "tsc",
     "devStart": "nodemon index.ts"
   },
   "prisma": {
