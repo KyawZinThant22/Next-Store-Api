@@ -1,0 +1,4 @@
+name: next-store-api
+type: web
+buildCommand: yarn run build && tsc
+startCommand: yarn start
