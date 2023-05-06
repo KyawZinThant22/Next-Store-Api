@@ -6,7 +6,7 @@
   "author": "kyaw zin thant",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node ./dist/index.js",
     "build": "tsc",
     "devStart": "nodemon index.ts"
   },
