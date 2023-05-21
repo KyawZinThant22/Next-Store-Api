@@ -174,7 +174,7 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     price: string | undefined;
     description: string | undefined;
     image1: string | undefined;
-    image2: string | undefined;
+    stock: string | undefined;
   };
 
   let {
@@ -182,7 +182,6 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     price,
     description,
     image1,
-    image2,
     discountPercent,
     detail,
     categoryId,
@@ -194,7 +193,7 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     price,
     description,
     image1,
-    image2,
+    stock,
   };
 
   //   Throws error if the required fields is not specified
@@ -233,7 +232,6 @@ export const createProduct = asyncHandler(async (req, res, next) => {
       price,
       description,
       image1,
-      image2,
       discountPercent,
       detail,
       stock,
