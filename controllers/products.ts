@@ -265,6 +265,17 @@ export const deleteProduct = asyncHandler(async (req, res, next) => {
   });
 });
 
+export const getProduct = asyncHandler(async (req, res, next) => {
+  const product = await prisma.product.findUnique({
+    where: { id: req.params.id },
+  });
+
+  res.status(200).json({
+    success: true,
+    data: product,
+  });
+});
+
 // ===================== Errors ========================
 const invalidPriceError = errorObj(
   400,
